@@ -1,48 +1,342 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap');
+
 body {
     color: #000000;
     text-align: center;
-    margin-top: 50px;
+    margin: 0;
+    padding: 0;
+    background-color: #ADD8E6;
+    font-family: Arial, sans-serif;
 }
 
-title {
+h1 {
     text-align: center;
-    font-family: "FF Providence Sans", sans-serif;
+    font-family: "Courier New", monospace;
     font-weight: bolder;
-    margin-top: 50px;
+    font-size: 80px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+a.click {
+    font-weight: bolder;
+    font-size: 30px;
+    padding: 40px;
+    border-radius: 10px;
+    background-color: lightgreen;
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+}
+
+a.click:hover {
+    background-color: #90EE90;
+    cursor: pointer;
 }
 
 ul {
-  list-style-type: none;
-  padding: 15px;
-  display: flex;
-  justify-content: center;
-  gap: 1em;
+    list-style-type: none;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 1em;
 }
 
-li{
-  display: inline;
+li {
+    display: inline;
 }
 
-li a{
-  text-decoration: none;
-  background-color: lightgray;
-  color: black;
-  padding: 20px;
+li a {
+    text-decoration: none;
+    background-color: lightgray;
+    color: black;
+    padding: 20px;
 }
 
 nav {
-  background-color: lightblue;
-  border-top: 3px dashed #AB0026;
-  border-bottom: 3px dashed #AB0026;
+    background-color: lightblue;
+    border-top: 3px dashed #AB0026;
+    border-bottom: 3px dashed #AB0026;
 }
 
-li a:hover{
-  text-decoration: underline !important;
-  background-color: lightslategray;
+li a:hover {
+    text-decoration: underline !important;
+    background-color: lightslategray;
 }
 
-p1 {
-    font-weight: bolder;
-    padding: 25px;
-    background-color: lightgreen;
+/* Board Container */
+#board {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+/* Main Board Grid (3x3 big cells) */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 150px);
+    grid-template-rows: repeat(3, 150px);
+    gap: 15px;
+    padding: 0;
+    background-color: #4DADE5;
+    border: 4px solid #4DADE5;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Row wrapper */
+.row {
+    display: contents;
+}
+
+/* Big Cells (3x3 grid each) */
+.big.cell {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2px;
+    padding: 0;
+    background-color: #4DADE5;
+    border: none;
+    width: 150px;
+    height: 150px;
+    position: relative;
+}
+
+/* Active region highlight */
+.big.cell.active-region {
+    box-shadow: 0 0 0 4px #FFD700, inset 0 0 0 2px #FFD700;
+}
+
+/* Small Cells */
+.small.cell {
+    background-color: #E8F8F5;
+    border: 2px solid #4DADE5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    color: #2E86AB;
+}
+
+/* Small cell hover effect */
+.small.cell:hover {
+    background-color: #D6EEF1;
+}
+
+/* X mark styling */
+.small.cell.x-mark {
+    color: #E74C3C;
+    font-weight: bold;
+}
+
+/* O mark styling */
+.small.cell.o-mark {
+    color: darkslateblue;
+    font-weight: bold;
+}
+
+/* Game Controls */
+.game-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 100px;
+    width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.game-controls button {
+    background-color: #FFD700;
+    border: none;
+    padding: 12px 25px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.game-controls button:hover {
+    background-color: #FFC700;
+}
+
+/* Restart Button */
+#restart-btn {
+    background-color: #FFD700;
+    border: none;
+    padding: 12px 25px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: -15px;
+}
+
+#restart-btn:hover {
+    background-color: #FFC700;
+}
+
+/* Home Button */
+#home-btn {
+    background-color: #FFD700;
+    border: none;
+    padding: 12px 25px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 20px;
+    margin-top: 15px;
+    margin-right: 10px;
+    margin-bottom: -15px;
+}
+
+#home-btn:hover {
+    background-color: #FFC700;
+}
+
+/* Big Cell Overlay (when won) */
+.big.cell.won {
+    opacity: 0.6;
+}
+
+.big-cell-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    font-weight: bold;
+    z-index: 10;
+    background-color: rgba(200, 200, 200, 0.3);
+}
+
+.big-cell-overlay.x-mark {
+    color: #E74C3C;
+}
+
+.big-cell-overlay.o-mark {
+    color: darkslateblue;
+}
+
+/* Win Modal */
+.win-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.win-message {
+    background: pink;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    animation: bounceIn 0.6s ease-out;
+}
+
+.win-message h2 {
+    font-size: 48px;
+    margin: 0 0 20px 0;
+}
+
+.winner-text {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.win-message-text {
+    font-size: 20px;
+    margin: 15px 0 0 0;
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    70% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Restart button in modal */
+#restart-in-modal {
+    background-color: #E74C3C;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: all 0.3s ease;
+}
+
+#restart-in-modal:hover {
+    background-color: #C0392B;
+    transform: scale(1.05);
+}
+
+/* Rules Container */
+.rules-container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px;
+    font-family: "Comfortaa", sans-serif;
+    background: linear-gradient(135deg, #E8F8F5, #D6EEF1);
+    border: 3px solid #4DADE5;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.rules-container h2 {
+    color: #2E86AB;
+    font-size: 28px;
+    margin-top: 0;
+    margin-bottom: 25px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.rules-content {
+    text-align: left;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+}
+
+.rule-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-left: 5px solid #FFD700;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }

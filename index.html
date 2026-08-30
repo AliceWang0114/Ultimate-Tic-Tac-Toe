@@ -4,126 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ultimate Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <div id="title">
-        <h1>Ultimate Tic-Tac-Toe!</h1>
+    <h1>Ultimate Tic-Tac-Toe!</h1>
+    <a href="game.html" class="click">Start to play!</a>
+    <div class="rules-container">
+        <h2>📋 Game Rules</h2>
+        <div class="rules-content">
+            <div class="rule-item">
+                <h3>1. Board Structure</h3>
+                <p>The game board consists of 9 big cells arranged in a 3x3 grid. Each big cell contains 9 small cells
+                    also in a 3x3 grid. Total: 81 playable cells.</p>
+            </div>
+
+            <div class="rule-item">
+                <h3>2. First Move</h3>
+                <p>The first player (X or O) can play in <strong>any of the 81 cells</strong> anywhere on the board.</p>
+            </div>
+
+            <div class="rule-item">
+                <h3>3. Subsequent Moves</h3>
+                <p>After the first move, each player must play in the <strong>big cell that corresponds to the position
+                        of the opponent's last move within their small board</strong>.</p>
+                <p><em>Example:</em> If your opponent plays in the top-right cell (position 2) of any big cell, you must
+                    play in the top-right big cell (position 2 of the 3x3 grid).</p>
+            </div>
+
+            <div class="rule-item">
+                <h3>4. Freedom Rule</h3>
+                <p>If the directed big cell is <strong>already won</strong>, you gain freedom to play in <strong>any
+                        unwon big cell</strong> on the board.</p>
+            </div>
+
+            <div class="rule-item">
+                <h3>5. Winning a Small Board</h3>
+                <p>Get <strong>3 of your symbols in a row</strong> (horizontal, vertical, or diagonal) within a big cell
+                    to win that big cell.</p>
+            </div>
+
+            <div class="rule-item">
+                <h3>6. Winning the Game</h3>
+                <p>Get <strong>3 won big cells in a row</strong> (horizontal, vertical, or diagonal) to win the entire
+                    game!</p>
+            </div>
+        </div>
     </div>
-    <div id="board">
-        <div class="board">
-            <div class="row">
-                <div class="big cell" id="big-cella">
-                    <div class="small cell" id="small-cella0"></div>
-                    <div class="small cell" id="small-cella1"></div>
-                    <div class="small cell" id="small-cella2"></div>
-                    <div class="small cell" id="small-cella3"></div>
-                    <div class="small cell" id="small-cella4"></div>
-                    <div class="small cell" id="small-cella5"></div>
-                    <div class="small cell" id="small-cella6"></div>
-                    <div class="small cell" id="small-cella7"></div>
-                    <div class="small cell" id="small-cella8"></div>
-                </div>
-                <div class="big cell" id="big-cellb">
-                    <div class="small cell" id="small-cellb0"></div>
-                    <div class="small cell" id="small-cellb1"></div>
-                    <div class="small cell" id="small-cellb2"></div>
-                    <div class="small cell" id="small-cellb3"></div>
-                    <div class="small cell" id="small-cellb4"></div>
-                    <div class="small cell" id="small-cellb5"></div>
-                    <div class="small cell" id="small-cellb6"></div>
-                    <div class="small cell" id="small-cellb7"></div>
-                    <div class="small cell" id="small-cellb8"></div>
-                </div>
-                <div class="big cell" id="big-cellc">
-                    <div class="small cell" id="small-cellc0"></div>
-                    <div class="small cell" id="small-cellc1"></div>
-                    <div class="small cell" id="small-cellc2"></div>
-                    <div class="small cell" id="small-cellc3"></div>
-                    <div class="small cell" id="small-cellc4"></div>
-                    <div class="small cell" id="small-cellc5"></div>
-                    <div class="small cell" id="small-cellc6"></div>
-                    <div class="small cell" id="small-cellc7"></div>
-                    <div class="small cell" id="small-cellc8"></div>
-                </div>
-                <div class="row">
-                    <div class="big cell" id="big-celld">
-                        <div class="small cell" id="small-celld0"></div>
-                        <div class="small cell" id="small-celld1"></div>
-                        <div class="small cell" id="small-celld2"></div>
-                        <div class="small cell" id="small-celld3"></div>
-                        <div class="small cell" id="small-celld4"></div>
-                        <div class="small cell" id="small-celld5"></div>
-                        <div class="small cell" id="small-celld6"></div>
-                        <div class="small cell" id="small-celld7"></div>
-                        <div class="small cell" id="small-celld8"></div>
-                    </div>
-                    <div class="big cell" id="big-celle">
-                        <div class="small cell" id="small-celle0"></div>
-                        <div class="small cell" id="small-celle1"></div>
-                        <div class="small cell" id="small-celle2"></div>
-                        <div class="small cell" id="small-celle3"></div>
-                        <div class="small cell" id="small-celle4"></div>
-                        <div class="small cell" id="small-celle5"></div>
-                        <div class="small cell" id="small-celle6"></div>
-                        <div class="small cell" id="small-celle7"></div>
-                        <div class="small cell" id="small-celle8"></div>
-                    </div>
-                    <div class="big cell" id="big-cellf">
-                        <div class="small cell" id="small-cellf0"></div>
-                        <div class="small cell" id="small-cellf1"></div>
-                        <div class="small cell" id="small-cellf2"></div>
-                        <div class="small cell" id="small-cellf3"></div>
-                        <div class="small cell" id="small-cellf4"></div>
-                        <div class="small cell" id="small-cellf5"></div>
-                        <div class="small cell" id="small-cellf6"></div>
-                        <div class="small cell" id="small-cellf7"></div>
-                        <div class="small cell" id="small-cellf8"></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="big cell" id="big-cellg">
-                        <div class="small cell" id="small-cellg0"></div>
-                        <div class="small cell" id="small-cellg1"></div>
-                        <div class="small cell" id="small-cellg2"></div>
-                        <div class="small cell" id="small-cellg3"></div>
-                        <div class="small cell" id="small-cellg4"></div>
-                        <div class="small cell" id="small-cellg5"></div>
-                        <div class="small cell" id="small-cellg6"></div>
-                        <div class="small cell" id="small-cellg7"></div>
-                        <div class="small cell" id="small-cellg8"></div>
-                    </div>
-                    <div class="big cell" id="big-cellh">
-                        <div class="small cell" id="small-cellh0"></div>
-                        <div class="small cell" id="small-cellh1"></div>
-                        <div class="small cell" id="small-cellh2"></div>
-                        <div class="small cell" id="small-cellh3"></div>
-                        <div class="small cell" id="small-cellh4"></div>
-                        <div class="small cell" id="small-cellh5"></div>
-                        <div class="small cell" id="small-cellh6"></div>
-                        <div class="small cell" id="small-cellh7"></div>
-                        <div class="small cell" id="small-cellh8"></div>
-                    </div>
-                    <div class="big cell" id="big-celli">
-                        <div class="small cell" id="small-celli0"></div>
-                        <div class="small cell" id="small-celli1"></div>
-                        <div class="small cell" id="small-celli2"></div>
-                        <div class="small cell" id="small-celli3"></div>
-                        <div class="small cell" id="small-celli4"></div>
-                        <div class="small cell" id="small-celli5"></div>
-                        <div class="small cell" id="small-celli6"></div>
-                        <div class="small cell" id="small-celli7"></div>
-                        <div class="small cell" id="small-celli8"></div>
-                    </div>
-                </div>
-                <nav>
-                    <ul>
-                        <li>
-                            <a href="#home"> Home </a>
-                            <a href="#tictactoe"> Tic-Tac-Toe Game </a>
-                        <li>
-                    </ul>
-                </nav>
-                <h1>Ultimate Tic-Tac-Toe!</h1>
-                <p1 class="click">Start to play!</p1>
+
+    <script src="script.js"></script>
 </body>
+
+</html>
